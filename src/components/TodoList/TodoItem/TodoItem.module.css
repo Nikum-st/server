@@ -1,0 +1,15 @@
+.TodoItem {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 12px 20px;
+	background-color: #fafafa;
+	border-radius: 8px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+	transition: background-color 0.2s ease;
+}
+.TodoItem.completed {
+	background-color: #d1f7e6;
+	text-decoration: line-through;
+	color: #888;
+}
