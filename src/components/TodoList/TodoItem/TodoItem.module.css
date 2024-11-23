@@ -1,5 +1,5 @@
 .TodoItem {
-	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-between;
 	align-items: center;
 	padding: 12px 20px;
@@ -7,9 +7,11 @@
 	border-radius: 8px;
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 	transition: background-color 0.2s ease;
+	margin-bottom: 20px;
 }
-.TodoItem.completed {
-	background-color: #d1f7e6;
-	text-decoration: line-through;
-	color: #888;
+
+.TodoItem .title {
+	flex-grow: 1;
+	word-wrap: break-word;
+	margin-right: 10px;
 }
