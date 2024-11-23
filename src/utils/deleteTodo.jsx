@@ -1,7 +1,7 @@
 export default function deleteTodo(refreshTodos) {
 	const requestDelete = async (id) => {
 		try {
-			const response = await fetch(`http://localhost:3005/todos/${id}`, {
+			const response = await fetch(`http://localhost:3001/todos/${id}`, {
 				method: 'DELETE',
 			});
 			if (!response.ok) {

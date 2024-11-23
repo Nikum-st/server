@@ -1,7 +1,7 @@
 export default function edititngTodo(refreshTodos) {
 	const requestUpdate = async (id, newValue) => {
 		try {
-			const response = await fetch(`http://localhost:3005/todos/${id}`, {
+			const response = await fetch(`http://localhost:3001/todos/${id}`, {
 				method: 'PATCH',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ title: newValue }),

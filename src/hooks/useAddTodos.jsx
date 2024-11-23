@@ -9,7 +9,7 @@ export default function useAddTodos(refreshTodos) {
 		setIsCreating(true);
 
 		try {
-			const response = await fetch('http://localhost:3005/todos', {
+			const response = await fetch('http://localhost:3001/todos', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(newTodo),

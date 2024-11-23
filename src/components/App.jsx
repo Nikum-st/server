@@ -27,13 +27,12 @@ export default function App() {
 	const { requestDelete } = deleteTodo(refreshTodos);
 	const { requestUpdate, setEditing } = editingTodo(refreshTodos);
 
-	const filteredTodos = todos.filter(
-		(todo) =>
-			todo.title && todo.title.toLowerCase().includes(searchValue.toLowerCase()),
+	const filteredTodos = todos.filter((todo) =>
+		todo.title.toLowerCase().includes(searchValue.toLowerCase()),
 	);
 
 	const sortedAndFilteredTodos = isSorted
-		? [...filteredTodos].sort((a, b) => a.title.localeCompare(b.title))
+		? [...filteredTodos].sort((a, b) => a.title.length - b.title.length)
 		: filteredTodos;
 
 	return (

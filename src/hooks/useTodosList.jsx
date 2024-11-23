@@ -7,7 +7,7 @@ export default function useTodosList(refreshTodosFlag) {
 	useEffect(() => {
 		setIsLoading(true);
 
-		fetch('http://localhost:3005/todos')
+		fetch('http://localhost:3001/todos')
 			.then((respons) => respons.json())
 			.then((result) => {
 				setTodos(result);
