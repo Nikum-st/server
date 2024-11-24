@@ -8,32 +8,18 @@ import {
 	TodoList,
 	Loading,
 	FieldNewTodo,
-	SortButton,
-	FieldSearch,
 } from './index';
 
 export default function App() {
-	const [refreshTodosFlag, setRefreshTodosFlag] = useState(false);
 	const [inputValue, setInputValue] = useState('');
 	const [editingId, setEditingId] = useState(null);
-	const [searchValue, setSearchValue] = useState('');
-	const [isSorted, setIsSorted] = useState(false);
-	const { todos, isLoading } = useTodosList(refreshTodosFlag);
+	const { todos, isLoading } = useTodosList();
 
-	const refreshTodos = () => setRefreshTodosFlag(!refreshTodosFlag);
-	const toggleSort = () => setIsSorted(!isSorted);
+	const todosArray = Object.entries(todos).map(([id, { title }]) => ({ id, title }));
 
-	const { isCreating, addTodos } = useAddTodos(refreshTodos);
-	const { requestDelete } = deleteTodo(refreshTodos);
-	const { requestUpdate, setEditing } = editingTodo(refreshTodos);
-
-	const filteredTodos = todos.filter((todo) =>
-		todo.title.toLowerCase().includes(searchValue.toLowerCase()),
-	);
-
-	const sortedAndFilteredTodos = isSorted
-		? [...filteredTodos].sort((a, b) => a.title.length - b.title.length)
-		: filteredTodos;
+	const { isCreating, addTodos } = useAddTodos();
+	const { requestDelete } = deleteTodo();
+	const { requestUpdate, setEditing } = editingTodo();
 
 	return (
 		<div className={style.App}>
@@ -41,20 +27,15 @@ export default function App() {
 				<Loading />
 			) : (
 				<>
-					<SortButton isSorted={isSorted} toggleSort={toggleSort} />
-					<FieldSearch
-						searchValue={searchValue}
-						setSearchValue={setSearchValue}
-					/>
 					<FieldNewTodo
 						isCreating={isCreating}
 						addTodos={addTodos}
 						inputValue={inputValue}
 						setInputValue={setInputValue}
 					/>
-					{filteredTodos.length > 0 ? (
+					{todosArray.length > 0 ? (
 						<TodoList
-							todos={sortedAndFilteredTodos}
+							todos={todosArray}
 							requestUpdate={requestUpdate}
 							requestDelete={requestDelete}
 							editingId={editingId}

@@ -35,6 +35,8 @@ button {
 }
 
 .SortButton {
+	width: 100%;
+	max-width: 400px;
 	background-color: #727272;
 	color: #fff;
 	border: none;

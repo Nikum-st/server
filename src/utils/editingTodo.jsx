@@ -1,23 +1,14 @@
-export default function edititngTodo(refreshTodos) {
+import { db } from '../data/firebase';
+import { ref, set } from 'firebase/database';
+
+export default function editingTodo() {
 	const requestUpdate = async (id, newValue) => {
+		const editingDBRef = ref(db, `todos/${id}`);
+
 		try {
-			const response = await fetch(`http://localhost:3001/todos/${id}`, {
-				method: 'PATCH',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ title: newValue }),
-			});
-
-			if (!response.ok) {
-				const errorText = await response.text();
-				console.error('Ошибка ответа сервера:', errorText);
-				throw new Error(
-					`Ошибка при редактировании задачи: ${response.status} ${response.statusText}`,
-				);
-			}
-
-			refreshTodos();
+			await set(editingDBRef, { title: newValue });
 		} catch (error) {
-			console.error('Ошибка при отправке запроса:', error);
+			console.error('Ошибка при редактировании задачи:', error);
 		}
 	};
 

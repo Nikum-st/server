@@ -19,6 +19,7 @@ export default function TodoItem({
 							requestUpdate={requestUpdate}
 							id={id}
 							initialTitle={title}
+							setEditingId={setEditingId}
 						/>
 					) : (
 						<div>

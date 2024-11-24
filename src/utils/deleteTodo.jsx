@@ -1,16 +1,14 @@
-export default function deleteTodo(refreshTodos) {
+import { db } from '../data/firebase';
+import { ref, remove } from 'firebase/database';
+
+export default function deleteTodo() {
 	const requestDelete = async (id) => {
+		const deleteDBRef = ref(db, `todos/${id}`);
 		try {
-			const response = await fetch(`http://localhost:3001/todos/${id}`, {
-				method: 'DELETE',
-			});
-			if (!response.ok) {
-				throw new Error('Ошибка при удалении задачи');
-			}
+			await remove(deleteDBRef);
 			console.log('Задача удалена!');
-			refreshTodos();
 		} catch (error) {
-			console.error('Ошибка:', error);
+			console.error('Ошибка при удалении задачи:', error);
 		}
 	};
 

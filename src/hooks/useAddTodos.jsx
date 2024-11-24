@@ -1,30 +1,30 @@
 import { useState } from 'react';
 import useTodosList from './useTodosList';
+import { ref, push } from 'firebase/database';
+import { db } from '../data/firebase';
 
-export default function useAddTodos(refreshTodos) {
+export default function useAddTodos() {
 	const [isCreating, setIsCreating] = useState(false);
 	const { todos, setTodos } = useTodosList();
 
-	const addTodos = async (newTodo) => {
+	const addTodos = (newTodo) => {
 		setIsCreating(true);
 
-		try {
-			const response = await fetch('http://localhost:3001/todos', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(newTodo),
+		const todosDBRef = ref(db, 'todos');
+
+		push(todosDBRef, newTodo)
+			.then((response) => {
+				const newKey = response.key;
+
+				setTodos({ [newKey]: newTodo });
+				console.log(`todos`, newKey, `newTodo`, newTodo);
+			})
+			.catch((errorText) => {
+				console.error('Ошибка ответа сервера:', errorText);
+			})
+			.finally(() => {
+				setIsCreating(false);
 			});
-			if (!response.ok) {
-				throw new Error('Ошибка при добавлении данных');
-			}
-			const createdTodo = await response.json();
-			setTodos([...todos, createdTodo]);
-			refreshTodos();
-		} catch (error) {
-			console.error(error);
-		} finally {
-			setIsCreating(false);
-		}
 	};
 
 	return {
