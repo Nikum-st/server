@@ -4,12 +4,7 @@ import {
 	deleteTodo,
 	useAddTodos,
 	editingTodo,
-	style,
-	TodoList,
-	Loading,
-	FieldNewTodo,
-	SortButton,
-	FieldSearch,
+	AppLayout,
 } from './index';
 
 export default function App() {
@@ -25,7 +20,7 @@ export default function App() {
 
 	const { isCreating, addTodos } = useAddTodos(refreshTodos);
 	const { requestDelete } = deleteTodo(refreshTodos);
-	const { requestUpdate, setEditing } = editingTodo(refreshTodos);
+	const { requestUpdate } = editingTodo(refreshTodos);
 
 	const filteredTodos = todos.filter((todo) =>
 		todo.title.toLowerCase().includes(searchValue.toLowerCase()),
@@ -36,36 +31,21 @@ export default function App() {
 		: filteredTodos;
 
 	return (
-		<div className={style.App}>
-			{isLoading ? (
-				<Loading />
-			) : (
-				<>
-					<SortButton isSorted={isSorted} toggleSort={toggleSort} />
-					<FieldSearch
-						searchValue={searchValue}
-						setSearchValue={setSearchValue}
-					/>
-					<FieldNewTodo
-						isCreating={isCreating}
-						addTodos={addTodos}
-						inputValue={inputValue}
-						setInputValue={setInputValue}
-					/>
-					{filteredTodos.length > 0 ? (
-						<TodoList
-							todos={sortedAndFilteredTodos}
-							requestUpdate={requestUpdate}
-							requestDelete={requestDelete}
-							editingId={editingId}
-							setEditing={setEditing}
-							setEditingId={setEditingId}
-						/>
-					) : (
-						<p>Задачи не найдены</p>
-					)}
-				</>
-			)}
-		</div>
+		<AppLayout
+			isLoading={isLoading}
+			inputValue={inputValue}
+			isSorted={isSorted}
+			toggleSort={toggleSort}
+			searchValue={searchValue}
+			setSearchValue={setSearchValue}
+			isCreating={isCreating}
+			addTodos={addTodos}
+			setInputValue={setInputValue}
+			sortedAndFilteredTodos={sortedAndFilteredTodos}
+			requestUpdate={requestUpdate}
+			setEditingId={setEditingId}
+			editingId={editingId}
+			requestDelete={requestDelete}
+		/>
 	);
 }

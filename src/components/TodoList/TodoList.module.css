@@ -1,11 +1,42 @@
 .TodoList {
 	display: flex;
 	flex-direction: column;
-	gap: 15px;
-	padding: 20px;
-	max-width: 600px;
-	width: 100%;
+	gap: 16px;
+	padding: 16px;
+	background-color: #f9f9f9;
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.TodoItem {
+	padding: 12px 16px;
 	background-color: #ffffff;
-	border-radius: 10px;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	transition:
+		box-shadow 0.3s,
+		transform 0.2s;
+}
+
+.TodoItem:hover {
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+	transform: translateY(-2px);
+}
+
+.containerTitle {
+	flex-grow: 1;
+	overflow: hidden;
+}
+
+.title {
+	font-size: 16px;
+	font-weight: 500;
+	color: #333333;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }

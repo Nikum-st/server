@@ -1,0 +1,15 @@
+.containerControls {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: inherit;
+	justify-content: center;
+	align-items: center;
+	gap: 15px;
+	margin-bottom: 20px;
+}
+@media (max-width: 768px) {
+	.containerControls {
+		flex-direction: column;
+		gap: 10px;
+	}
+}
