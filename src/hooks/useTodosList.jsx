@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 export default function useTodosList(refreshTodosFlag) {
 	const [isLoading, setIsLoading] = useState(false);
 	const [todos, setTodos] = useState([]);
+	const [isServerError, setIsServerError] = useState(false);
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -12,8 +13,9 @@ export default function useTodosList(refreshTodosFlag) {
 			.then((result) => {
 				setTodos(result);
 			})
+			.catch(() => setIsServerError(!isServerError))
 			.finally(() => setIsLoading(false));
 	}, [refreshTodosFlag]);
 
-	return { todos, setTodos, isLoading };
+	return { todos, setTodos, isLoading, isServerError };
 }

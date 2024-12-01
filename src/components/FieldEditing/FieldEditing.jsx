@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import style from './FieldEditing.module.css';
+import { useContext } from 'react';
+import { AppContext } from '../../contextAPI/AppContext';
 
-export const FieldEditing = ({ id, initialTitle, requestUpdate, setEditingId }) => {
+export const FieldEditing = ({ id, initialTitle }) => {
+	const { requestUpdate, setEditingId } = useContext(AppContext);
 	const [localValue, setLocalValue] = useState(initialTitle);
 
 	const onEditingSubmit = async (event) => {

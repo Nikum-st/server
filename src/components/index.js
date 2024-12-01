@@ -9,3 +9,5 @@ export { default as Loading } from './Loading/Loading';
 export { default as FieldNewTodo } from './FieldNewTodos/Field';
 export { default as SortButton } from './buttons/SortButton.jsx';
 export { default as FieldSearch } from './FieldSearch/FieldSearch.jsx';
+export { default as ContainerControls } from './ContainerControls/ContainerControls.jsx';
+export { AppContext } from '../contextAPI/AppContext.jsx';

@@ -1,12 +1,11 @@
 import style from './Field.module.css';
 import NewTodo from '../buttons/NewTodo';
+import { useContext } from 'react';
+import { AppContext } from '../../contextAPI/AppContext';
 
-export default function FieldNewTodo({
-	addTodos,
-	isCreating,
-	inputValue,
-	setInputValue,
-}) {
+export default function FieldNewTodo() {
+	const { addTodos, inputValue, setInputValue } = useContext(AppContext);
+
 	const onSubmit = (event) => {
 		event.preventDefault();
 		addTodos({ title: inputValue });
@@ -22,7 +21,7 @@ export default function FieldNewTodo({
 				onChange={({ target }) => setInputValue(target.value)}
 				placeholder="Новая задача"
 			/>
-			<NewTodo isCreating={isCreating} inputValue={inputValue} />
+			<NewTodo inputValue={inputValue} />
 		</form>
 	);
 }

@@ -7,3 +7,7 @@
 	padding: 20px;
 	box-sizing: border-box;
 }
+.serverError {
+	font-size: 30px;
+	color: red;
+}

@@ -2,29 +2,23 @@ import style from './TodoItem.module.css';
 import { DeleteTodo } from '../../buttons/DeleteTodo';
 import { EditingButton } from '../../buttons/UpdateTodo';
 import { FieldEditing } from '../../FieldEditing/FieldEditing';
+import { useContext } from 'react';
+import { AppContext } from '../../../contextAPI/AppContext';
 
-export default function TodoItem({
-	todos,
-	requestDelete,
-	requestUpdate,
-	setEditingId,
-	editingId,
-}) {
+export default function TodoItem() {
+	const { todos, editingId } = useContext(AppContext);
+
 	return (
 		<div>
 			{todos.map(({ id, title }) => (
 				<div className={style.TodoItem} key={id}>
 					{editingId === id ? (
-						<FieldEditing
-							requestUpdate={requestUpdate}
-							id={id}
-							initialTitle={title}
-						/>
+						<FieldEditing id={id} initialTitle={title} />
 					) : (
 						<div>
 							<p className={style.title}>{title}</p>
-							<DeleteTodo id={id} requestDelete={requestDelete} />
-							<EditingButton id={id} setEditingId={setEditingId} />
+							<DeleteTodo id={id} />
+							<EditingButton id={id} />
 						</div>
 					)}
 				</div>

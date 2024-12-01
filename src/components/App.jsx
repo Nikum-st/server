@@ -8,8 +8,8 @@ import {
 	TodoList,
 	Loading,
 	FieldNewTodo,
-	SortButton,
-	FieldSearch,
+	ContainerControls,
+	AppContext,
 } from './index';
 
 export default function App() {
@@ -18,14 +18,14 @@ export default function App() {
 	const [editingId, setEditingId] = useState(null);
 	const [searchValue, setSearchValue] = useState('');
 	const [isSorted, setIsSorted] = useState(false);
-	const { todos, isLoading } = useTodosList(refreshTodosFlag);
+	const { todos, isLoading, isServerError } = useTodosList(refreshTodosFlag);
 
 	const refreshTodos = () => setRefreshTodosFlag(!refreshTodosFlag);
 	const toggleSort = () => setIsSorted(!isSorted);
 
 	const { isCreating, addTodos } = useAddTodos(refreshTodos);
 	const { requestDelete } = deleteTodo(refreshTodos);
-	const { requestUpdate, setEditing } = editingTodo(refreshTodos);
+	const { requestUpdate } = editingTodo(refreshTodos);
 
 	const filteredTodos = todos.filter((todo) =>
 		todo.title.toLowerCase().includes(searchValue.toLowerCase()),
@@ -36,36 +36,40 @@ export default function App() {
 		: filteredTodos;
 
 	return (
-		<div className={style.App}>
-			{isLoading ? (
-				<Loading />
-			) : (
-				<>
-					<SortButton isSorted={isSorted} toggleSort={toggleSort} />
-					<FieldSearch
-						searchValue={searchValue}
-						setSearchValue={setSearchValue}
-					/>
-					<FieldNewTodo
-						isCreating={isCreating}
-						addTodos={addTodos}
-						inputValue={inputValue}
-						setInputValue={setInputValue}
-					/>
-					{filteredTodos.length > 0 ? (
-						<TodoList
-							todos={sortedAndFilteredTodos}
-							requestUpdate={requestUpdate}
-							requestDelete={requestDelete}
-							editingId={editingId}
-							setEditing={setEditing}
-							setEditingId={setEditingId}
-						/>
-					) : (
-						<p>Задачи не найдены</p>
-					)}
-				</>
-			)}
-		</div>
+		<AppContext.Provider
+			value={{
+				todos: sortedAndFilteredTodos,
+				isSorted,
+				toggleSort,
+				searchValue,
+				setSearchValue,
+				editingId,
+				setEditingId,
+				requestDelete,
+				requestUpdate,
+				isCreating,
+				addTodos,
+				inputValue,
+				setInputValue,
+			}}
+		>
+			<div className={style.App}>
+				{isLoading ? (
+					<Loading />
+				) : (
+					<>
+						<ContainerControls />
+						<FieldNewTodo />
+						{filteredTodos.length > 0 ? (
+							<TodoList />
+						) : isServerError ? (
+							<p className={style.serverError}>Подключитесь к серверу!</p>
+						) : (
+							<p>Задачи не найдены</p>
+						)}
+					</>
+				)}
+			</div>
+		</AppContext.Provider>
 	);
 }

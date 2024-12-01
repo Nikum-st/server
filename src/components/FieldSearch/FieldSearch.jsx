@@ -1,8 +1,12 @@
 import style from './FieldSearch.module.css';
 import { debounce } from 'lodash';
 import { useEffect, useMemo } from 'react';
+import { useContext } from 'react';
+import { AppContext } from '../../contextAPI/AppContext';
 
-export default function FieldSearch({ searchValue, setSearchValue }) {
+export default function FieldSearch() {
+	const { searchValue, setSearchValue } = useContext(AppContext);
+
 	const debouncedSetSearchValue = useMemo(
 		() =>
 			debounce((value) => {
