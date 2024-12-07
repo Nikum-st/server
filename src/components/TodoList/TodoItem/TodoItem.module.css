@@ -9,9 +9,3 @@
 	transition: background-color 0.2s ease;
 	margin-bottom: 20px;
 }
-
-.TodoItem .title {
-	flex-grow: 1;
-	word-wrap: break-word;
-	margin-right: 10px;
-}

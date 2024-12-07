@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import style from './FieldEditing.module.css';
 import { useContext } from 'react';
-import { AppContext } from '../../contextAPI/AppContext';
+import { AppContext } from '../App/AppContext';
 
 export const FieldEditing = ({ id, initialTitle }) => {
 	const { requestUpdate, setEditingId } = useContext(AppContext);

@@ -1,0 +1,12 @@
+.TodoControls .title {
+	flex-grow: 1;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	max-width: 70%;
+}
+.TodoControls {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 20px;
+}

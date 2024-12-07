@@ -1,9 +1,8 @@
 import style from './TodoItem.module.css';
-import { DeleteTodo } from '../../buttons/DeleteTodo';
-import { EditingButton } from '../../buttons/UpdateTodo';
 import { FieldEditing } from '../../FieldEditing/FieldEditing';
 import { useContext } from 'react';
-import { AppContext } from '../../../contextAPI/AppContext';
+import { AppContext } from '../../App/AppContext';
+import TodoControls from './TodoControls/TodoControls';
 
 export default function TodoItem() {
 	const { todos, editingId } = useContext(AppContext);
@@ -15,11 +14,7 @@ export default function TodoItem() {
 					{editingId === id ? (
 						<FieldEditing id={id} initialTitle={title} />
 					) : (
-						<div>
-							<p className={style.title}>{title}</p>
-							<DeleteTodo id={id} />
-							<EditingButton id={id} />
-						</div>
+						<TodoControls id={id} title={title} />
 					)}
 				</div>
 			))}

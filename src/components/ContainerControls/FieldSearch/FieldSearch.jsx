@@ -1,8 +1,8 @@
-import style from './FieldSearch.module.css';
 import { debounce } from 'lodash';
 import { useEffect, useMemo } from 'react';
 import { useContext } from 'react';
-import { AppContext } from '../../contextAPI/AppContext';
+import { AppContext } from '../../App/AppContext';
+import { FieldSearchLayout } from './FieldSearchLayout';
 
 export default function FieldSearch() {
 	const { searchValue, setSearchValue } = useContext(AppContext);
@@ -24,14 +24,9 @@ export default function FieldSearch() {
 	};
 
 	return (
-		<div className={style.searchField}>
-			<input
-				type="text"
-				placeholder="Поиск задач..."
-				defaultValue={searchValue}
-				onChange={handleInputChange}
-				className={style.inputField}
-			/>
-		</div>
+		<FieldSearchLayout
+			handleInputChange={handleInputChange}
+			searchValue={searchValue}
+		/>
 	);
 }

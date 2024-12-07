@@ -1,6 +1,6 @@
 import style from './Buttons.module.css';
 import { useContext } from 'react';
-import { AppContext } from '../../contextAPI/AppContext';
+import { AppContext } from '../App/AppContext';
 
 export const EditingButton = ({ id }) => {
 	const { setEditingId } = useContext(AppContext);

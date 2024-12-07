@@ -1,9 +1,9 @@
-import style from './Field.module.css';
+import style from './FieldNewTodos.module.css';
 import NewTodo from '../buttons/NewTodo';
 import { useContext } from 'react';
-import { AppContext } from '../../contextAPI/AppContext';
+import { AppContext } from '../App/AppContext';
 
-export default function FieldNewTodo() {
+export default function FieldNewTodos() {
 	const { addTodos, inputValue, setInputValue } = useContext(AppContext);
 
 	const onSubmit = (event) => {
