@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { useAppLogic } from './index';
+import { useAppLogic } from '../index';
 
 export const AppContext = createContext();
 

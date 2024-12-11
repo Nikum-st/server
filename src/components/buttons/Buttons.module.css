@@ -43,6 +43,13 @@ button {
 	cursor: pointer;
 	margin-bottom: 10px;
 }
+.SaveButton {
+	background-color: rgb(94, 34, 91);
+}
+
+.CancelButton {
+	background-color: rgb(35, 36, 28);
+}
 
 button:hover {
 	opacity: 0.6;

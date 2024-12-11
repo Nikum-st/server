@@ -2,6 +2,7 @@ import { useState } from 'react';
 import style from './FieldEditing.module.css';
 import { useContext } from 'react';
 import { AppContext } from '../App/AppContext';
+import { EditingControl } from '../index';
 
 export const FieldEditing = ({ id, initialTitle }) => {
 	const { requestUpdate, setEditingId } = useContext(AppContext);
@@ -20,16 +21,7 @@ export const FieldEditing = ({ id, initialTitle }) => {
 				value={localValue}
 				onChange={({ target }) => setLocalValue(target.value)}
 			/>
-			<button className={style.saveButton} type="submit">
-				Сохранить
-			</button>
-			<button
-				type="button"
-				className={style.cancelButton}
-				onClick={() => setEditingId(null)}
-			>
-				Отмена
-			</button>
+			<EditingControl />
 		</form>
 	);
 };

@@ -1,6 +1,6 @@
 import style from './Buttons.module.css';
 import { useContext } from 'react';
-import { AppContext } from '../App/AppContext';
+import { AppContext } from '../index';
 
 export const DeleteTodo = ({ id }) => {
 	const { requestDelete } = useContext(AppContext);

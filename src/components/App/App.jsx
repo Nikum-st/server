@@ -1,4 +1,4 @@
-import { AppLayout, AppProvider } from './index';
+import { AppLayout, AppProvider } from '../index';
 
 export default function App() {
 	return (

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAddTodos, deleteTodo, editingTodo, useTodosList } from './index';
+import { useAddTodos, deleteTodo, editingTodo, useTodosList } from '../components/index';
 
 export const useAppLogic = () => {
 	const [refreshTodosFlag, setRefreshTodosFlag] = useState(false);
@@ -31,7 +31,6 @@ export const useAppLogic = () => {
 		searchValue,
 		setSearchValue,
 		editingId,
-		setEditingId,
 		requestDelete,
 		requestUpdate,
 		isCreating,

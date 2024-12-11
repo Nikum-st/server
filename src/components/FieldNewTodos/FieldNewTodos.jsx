@@ -21,7 +21,7 @@ export default function FieldNewTodos() {
 				onChange={({ target }) => setInputValue(target.value)}
 				placeholder="Новая задача"
 			/>
-			<NewTodo inputValue={inputValue} />
+			<NewTodo />
 		</form>
 	);
 }

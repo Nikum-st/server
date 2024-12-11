@@ -5,7 +5,7 @@ import {
 	style,
 	FieldNewTodos,
 	AppContext,
-} from './index';
+} from '../index';
 import { useContext } from 'react';
 
 export const AppLayout = () => {
