@@ -1,16 +1,17 @@
 import { debounce } from 'lodash';
 import { useEffect, useMemo } from 'react';
-import { useContext } from 'react';
-import { AppContext } from '../../App/AppContext';
 import { FieldSearchLayout } from './FieldSearchLayout';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectSearchValue, setSearchValue } from '../../../store';
 
 export default function FieldSearch() {
-	const { searchValue, setSearchValue } = useContext(AppContext);
+	const dispatch = useDispatch();
+	const searchValue = useSelector(selectSearchValue);
 
 	const debouncedSetSearchValue = useMemo(
 		() =>
 			debounce((value) => {
-				setSearchValue(value);
+				dispatch(setSearchValue(value));
 			}, 300),
 		[setSearchValue],
 	);

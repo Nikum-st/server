@@ -1,15 +1,16 @@
 import style from './FieldNewTodos.module.css';
 import NewTodo from '../buttons/NewTodo';
-import { useContext } from 'react';
-import { AppContext } from '../App/AppContext';
+import { addTodo, selectInputValue, setInputValue } from '../../store';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function FieldNewTodos() {
-	const { addTodos, inputValue, setInputValue } = useContext(AppContext);
+	const dispatch = useDispatch();
+	const inputValue = useSelector(selectInputValue);
 
 	const onSubmit = (event) => {
 		event.preventDefault();
-		addTodos({ title: inputValue });
-		setInputValue('');
+		dispatch(addTodo({ title: inputValue }));
+		dispatch(setInputValue(''));
 	};
 
 	return (
@@ -18,7 +19,7 @@ export default function FieldNewTodos() {
 				className={style.inputField}
 				type="text"
 				value={inputValue}
-				onChange={({ target }) => setInputValue(target.value)}
+				onChange={({ target }) => dispatch(setInputValue(target.value))}
 				placeholder="Новая задача"
 			/>
 			<NewTodo />

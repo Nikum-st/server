@@ -1,11 +1,13 @@
 import style from './TodoItem.module.css';
 import { FieldEditing } from '../../FieldEditing/FieldEditing';
-import { useContext } from 'react';
-import { AppContext } from '../../App/AppContext';
 import TodoControls from './TodoControls/TodoControls';
+import { useSelector } from 'react-redux';
+import { selectEditingId } from '../../../store';
+import { useAppLogic } from '../../../hooks/useAppLogic';
 
 export default function TodoItem() {
-	const { todos, editingId } = useContext(AppContext);
+	const { todos } = useAppLogic();
+	const editingId = useSelector(selectEditingId);
 
 	return (
 		<div>

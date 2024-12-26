@@ -1,12 +1,14 @@
 import style from './Buttons.module.css';
-import { useContext } from 'react';
-import { AppContext } from '../App/AppContext';
+import { selectIsSorted, setIsSorted } from '../../store';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function SortButton() {
-	const { isSorted, toggleSort } = useContext(AppContext);
+	const dispatch = useDispatch();
+	const toggleSort = (isSorted) => dispatch(setIsSorted(!isSorted));
+	const isSorted = useSelector(selectIsSorted);
 
 	return (
-		<button onClick={() => toggleSort()} className={style.SortButton}>
+		<button onClick={() => toggleSort(isSorted)} className={style.SortButton}>
 			{isSorted ? 'Отключить сортировку' : 'Сортировать по колличеству символов'}
 		</button>
 	);

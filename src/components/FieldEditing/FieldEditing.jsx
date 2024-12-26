@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import style from './FieldEditing.module.css';
-import { useContext } from 'react';
-import { AppContext } from '../App/AppContext';
 import { EditingControl } from '../index';
+import { requestUpdate } from '../../utils/editingTodo';
+import { useDispatch } from 'react-redux';
 
 export const FieldEditing = ({ id, initialTitle }) => {
-	const { requestUpdate, setEditingId } = useContext(AppContext);
+	const dispatch = useDispatch();
+
 	const [localValue, setLocalValue] = useState(initialTitle);
 
-	const onEditingSubmit = async (event) => {
+	const onEditingSubmit = (event) => {
 		event.preventDefault();
-		await requestUpdate(id, localValue);
-		setEditingId(null);
+		dispatch(requestUpdate(id, localValue));
 	};
 
 	return (

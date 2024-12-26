@@ -1,9 +1,10 @@
 import style from './Buttons.module.css';
-import { useContext } from 'react';
-import { AppContext } from '../App/AppContext';
+import { selectIsCreating, selectInputValue } from '../../store';
+import { useSelector } from 'react-redux';
 
 export default function NewTodo() {
-	const { isCreating, inputValue } = useContext(AppContext);
+	const isCreating = useSelector(selectIsCreating);
+	const inputValue = useSelector(selectInputValue);
 
 	return (
 		<button

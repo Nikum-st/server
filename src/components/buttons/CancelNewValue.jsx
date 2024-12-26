@@ -1,15 +1,12 @@
+import { useDispatch } from 'react-redux';
 import style from './Buttons.module.css';
-import { useContext } from 'react';
+import { clearEditing } from '../../store';
 
 export const CancelNewValue = () => {
-	const { setEditingId } = useContext();
-
+	const dispatch = useDispatch();
+	const onCancelNewValue = () => dispatch(clearEditing);
 	return (
-		<button
-			type="button"
-			className={style.cancelButton}
-			onClick={() => setEditingId(null)}
-		>
+		<button className={style.CancelButton} onClick={onCancelNewValue}>
 			Отмена
 		</button>
 	);

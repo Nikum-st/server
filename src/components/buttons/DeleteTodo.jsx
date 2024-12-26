@@ -1,12 +1,15 @@
 import style from './Buttons.module.css';
-import { useContext } from 'react';
-import { AppContext } from '../index';
+import { deleteTodo } from '../index';
+import { useDispatch } from 'react-redux';
 
 export const DeleteTodo = ({ id }) => {
-	const { requestDelete } = useContext(AppContext);
+	const dispatch = useDispatch();
+	const onDelete = () => {
+		dispatch(deleteTodo(id));
+	};
 
 	return (
-		<button onClick={() => requestDelete(id)} className={style.DeleteTodo}>
+		<button onClick={onDelete} className={style.DeleteTodo}>
 			Удалить
 		</button>
 	);

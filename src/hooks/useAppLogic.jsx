@@ -1,23 +1,13 @@
-import { useState } from 'react';
-import { useAddTodos, deleteTodo, editingTodo, useTodosList } from '../components/index';
+import { useSelector } from 'react-redux';
+import { selectTodos, selectSearchValue, selectIsSorted } from '../store';
 
 export const useAppLogic = () => {
-	const [refreshTodosFlag, setRefreshTodosFlag] = useState(false);
-	const [inputValue, setInputValue] = useState('');
-	const [editingId, setEditingId] = useState(null);
-	const [searchValue, setSearchValue] = useState('');
-	const [isSorted, setIsSorted] = useState(false);
-
-	const refreshTodos = () => setRefreshTodosFlag(!refreshTodosFlag);
-	const toggleSort = () => setIsSorted(!isSorted);
-
-	const { isCreating, addTodos } = useAddTodos(refreshTodos);
-	const { requestDelete } = deleteTodo(refreshTodos);
-	const { requestUpdate } = editingTodo(refreshTodos);
-	const { todos, isLoading, isServerError } = useTodosList(refreshTodosFlag);
+	const todos = useSelector(selectTodos);
+	const searchValue = useSelector(selectSearchValue);
+	const isSorted = useSelector(selectIsSorted);
 
 	const filteredTodos = todos.filter((todo) =>
-		todo.title.toLowerCase().includes(searchValue.toLowerCase()),
+		todo.title?.toLowerCase().includes(searchValue.toLowerCase()),
 	);
 
 	const sortedAndFilteredTodos = isSorted
@@ -26,18 +16,5 @@ export const useAppLogic = () => {
 
 	return {
 		todos: sortedAndFilteredTodos,
-		isSorted,
-		toggleSort,
-		searchValue,
-		setSearchValue,
-		editingId,
-		requestDelete,
-		requestUpdate,
-		isCreating,
-		addTodos,
-		inputValue,
-		setInputValue,
-		isLoading,
-		isServerError,
 	};
 };

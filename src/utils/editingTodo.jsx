@@ -1,25 +1,23 @@
-export default function edititngTodo(refreshTodos) {
-	const requestUpdate = async (id, newValue) => {
-		try {
-			const response = await fetch(`http://localhost:3001/todos/${id}`, {
-				method: 'PATCH',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ title: newValue }),
-			});
+import { clearEditing, setTitleTodo } from '../store';
 
-			if (!response.ok) {
-				const errorText = await response.text();
-				console.error('Ошибка ответа сервера:', errorText);
-				throw new Error(
-					`Ошибка при редактировании задачи: ${response.status} ${response.statusText}`,
-				);
-			}
+export const requestUpdate = (id, newValue) => async (dispatch) => {
+	try {
+		const response = await fetch(`http://localhost:3001/todos/${id}`, {
+			method: 'PATCH',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ title: newValue }),
+		});
 
-			refreshTodos();
-		} catch (error) {
-			console.error('Ошибка при отправке запроса:', error);
+		if (!response.ok) {
+			const errorText = await response.text();
+			console.error('Ошибка ответа сервера:', errorText);
+			throw new Error(
+				`Ошибка при редактировании задачи: ${response.status} ${response.statusText}`,
+			);
 		}
-	};
-
-	return { requestUpdate };
-}
+		dispatch(setTitleTodo(id, newValue));
+		dispatch(clearEditing);
+	} catch (error) {
+		console.error('Ошибка при отправке запроса:', error);
+	}
+};

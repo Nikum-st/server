@@ -1,12 +1,13 @@
+import { useDispatch } from 'react-redux';
 import style from './Buttons.module.css';
-import { useContext } from 'react';
-import { AppContext } from '../App/AppContext';
+import { setEditingId } from '../../store';
 
 export const EditingButton = ({ id }) => {
-	const { setEditingId } = useContext(AppContext);
+	const dispatch = useDispatch();
+	const onEditing = () => dispatch(setEditingId(id));
 
 	return (
-		<button onClick={() => setEditingId(id)} className={style.UpdateTodo}>
+		<button onClick={onEditing} className={style.UpdateTodo}>
 			Редактировать
 		</button>
 	);
